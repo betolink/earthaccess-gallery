@@ -16,3 +16,5 @@ dependencies:
 - geopandas>=0.9
 - zarr>=2.9.5
 - jupyterlab>=3
+- jupyterlab-h5web
+- hdf5plugin
