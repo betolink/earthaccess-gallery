@@ -1,0 +1,43 @@
+#!/bin/bash
+# ---------------------------------------------------------------------------
+# Binder / repo2docker build hook.
+#
+# `pixi.toml` is the single source of truth for the environment:
+#
+#   1. Install pixi.
+#   2. Export the conda packages of the `default` pixi environment to an
+#      explicit spec (PyPI-only packages are skipped here).
+#   3. Install that spec into Binder's `notebook` environment.
+#   4. pip-install the PyPI-only packages (the earthaccess fork + extras).
+# ---------------------------------------------------------------------------
+
+set -euo pipefail
+
+CONDA_DIR="${CONDA_DIR:-/srv/conda}"
+NB_PYTHON_PREFIX="${NB_PYTHON_PREFIX:-${CONDA_DIR}/envs/notebook}"
+MAMBA_EXE="${MAMBA_EXE:-${CONDA_DIR}/bin/mamba}"
+
+# 1. Install pixi into $HOME/.pixi -------------------------------------------------
+curl -fsSL https://pixi.sh/install.sh | bash
+export PATH="${HOME}/.pixi/bin:${PATH}"
+pixi --version
+
+# 2. Export the conda packages from pixi.lock --------------------------------------
+SPEC_DIR="$(mktemp -d)"
+pixi workspace export conda-explicit-spec \
+    --environment default \
+    --platform linux-64 \
+    --ignore-pypi-errors \
+    "${SPEC_DIR}"
+
+# 3. Install them into the notebook environment ------------------------------------
+"${MAMBA_EXE}" install \
+    --prefix "${NB_PYTHON_PREFIX}" \
+    --file "${SPEC_DIR}/default_linux-64_conda_spec.txt" \
+    --yes
+
+# 4. Install PyPI-only dependencies -------------------------------------------------
+# `earthaccess[virtualizarr]` pulls in icechunk, virtualizarr, kerchunk, obstore,
+# etc. The `stac` extra provides odc-stac for the STAC notebooks.
+"${NB_PYTHON_PREFIX}/bin/python" -m pip install --no-cache-dir \
+    "earthaccess[stac,virtualizarr,widgets,geo] @ git+https://github.com/betolink/earthaccess.git@nextgen-virtual"

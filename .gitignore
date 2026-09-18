@@ -3,6 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Secrets
+.env
+.dev.vars
+*.dev.vars
+
+# Binder build artifacts
+binder/*_conda_spec.txt
+
 # C extensions
 *.so
 
@@ -128,3 +136,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+# pixi environments
+.pixi/*
+!.pixi/config.toml

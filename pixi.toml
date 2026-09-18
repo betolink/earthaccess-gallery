@@ -1,0 +1,87 @@
+[workspace]
+authors = ["betolink <betolin@gmail.com>"]
+channels = ["conda-forge"]
+name = "earthaccess-gallery"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+
+# ===========================================================================
+# Environment
+#
+# Single source of truth for local development and Binder.
+#
+# The `default` environment is exported to a conda explicit spec by
+# `binder/postBuild` and installed into Binder's `notebook` environment.
+# PyPI-only packages (the earthaccess fork and its extras) are pip-installed
+# by the same script.
+#
+# Python is pinned to 3.13 because earthaccess' `widgets` extra (lonboard /
+# anywidget, used by `granule.explore()`) is gated to `python_version < 3.14`.
+# ===========================================================================
+
+[feature.full.dependencies]
+python = "3.13.*"
+
+numpy = "*"
+scipy = "*"
+xarray = ">=2026.01"
+
+dask = "*"
+rioxarray = "*"
+rasterio = "*"
+cartopy = "*"
+matplotlib-base = "*"
+
+netcdf4 = "*"
+h5netcdf = ">=0.11"
+h5py = "*"
+hdf5plugin = "*"
+
+zarr = "*"
+
+geopandas = "*"
+shapely = "*"
+pyarrow = "*"
+
+jupyterlab = "*"
+ipywidgets = "*"
+
+flox = "*"
+
+pip = "*"
+
+[feature.full.pypi-dependencies]
+earthaccess = { git = "https://github.com/betolink/earthaccess.git", rev = "nextgen-virtual", extras = [
+    "stac",
+    "virtualizarr",
+    "widgets",
+    "geo",
+] }
+
+
+# ===========================================================================
+# Environments
+# ===========================================================================
+
+[environments]
+default = { features = ["full"] }
+
+
+# ===========================================================================
+# Tasks
+# ===========================================================================
+
+[tasks]
+
+lab = "jupyter lab"
+
+
+# ===========================================================================
+# Constraints
+#
+# Required for the native Pixi/PyPI dependency solve.
+# ===========================================================================
+
+[constraints]
+botocore = "<1.43"
