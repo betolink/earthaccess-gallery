@@ -1,0 +1,22 @@
+{
+  "name": "earthaccess-gallery",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"
+  ],
+  "postCreateCommand": "sudo chown -R vscode .pixi && pixi install && pixi run python -m ipykernel install --user --name earthaccess-gallery --display-name 'Python (earthaccess-gallery)'",
+  "remoteUser": "vscode",
+  "forwardPorts": [8888]
+}

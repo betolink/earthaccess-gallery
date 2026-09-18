@@ -8,12 +8,16 @@ Try it in your browser without installing anything!
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/betolink/earthaccess-gallery/main?labpath=index.md)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/betolink/earthaccess-gallery/blob/main/notebooks/stac/odc-stac-cmr.ipynb)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/betolink/earthaccess-gallery)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/betolink/earthaccess-gallery)
 
 > [!NOTE]
 > The Binder image builds from `pixi.toml` via `binder/postBuild`. The
 > `binder/runtime.txt` pins Python 3.13 so that the `earthaccess[widgets]` extra
 > (lonboard / anywidget, used by `granule.explore()`) is available. Colab is a
-> pip-only environment and installs from `requirements-colab.txt`.
+> pip-only environment and installs from `requirements-colab.txt`. Codespaces and
+> VS Code Dev Containers use `.devcontainer/`, which installs pixi and runs
+> `pixi install`.
 
 See **[index.md](index.md)** for the full notebook list with per-notebook
 **Binder** and **Open in Colab** launch buttons.
