@@ -1,0 +1,9 @@
+# Dependencies for Google Colab.
+#
+# Colab is a pip-only, no-conda environment, so it cannot read pixi.toml.
+# Keep this list aligned with the `earthaccess` extras selected in pixi.toml.
+#
+# Usage (from a notebook):
+#   %pip install -q -r https://raw.githubusercontent.com/betolink/earthaccess-gallery/main/requirements-colab.txt
+
+earthaccess[stac,virtualizarr,widgets,geo] @ git+https://github.com/betolink/earthaccess.git@nextgen-virtual
