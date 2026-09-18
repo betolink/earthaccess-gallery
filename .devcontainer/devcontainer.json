@@ -6,6 +6,17 @@
   },
   "customizations": {
     "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.pixi/envs/default/bin/python",
+        "python.terminal.activateEnvironment": false,
+        "python.useEnvironmentsExtension": false,
+        "files.watcherExclude": {
+          "**/.pixi/**": true
+        },
+        "search.exclude": {
+          "**/.pixi/**": true
+        }
+      },
       "extensions": [
         "ms-toolsai.jupyter",
         "ms-python.python",
