@@ -7,6 +7,7 @@ NASA Earthdata search, access, and analysis.
 Try it in your browser without installing anything!
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/betolink/earthaccess-gallery/main?labpath=index.md)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/betolink/earthaccess-gallery/blob/main/notebooks/stac/odc-stac-cmr.ipynb)
 
 > [!NOTE]
 > The Binder image builds from `pixi.toml` via `binder/postBuild`. The
